@@ -1,14 +1,20 @@
 def fib_mod(n, m):
-    a = 0
-    b = 1
-    res = '0 1 '
-    for i in range(2, int(n + 1)):
-        tmp = b
-        b = (a + b) % m
-        a = tmp
-        if a == 0 and b == 1:
+    if n == 1 and n == 2:
+        return 1
+
+    pizano = [0, 1, 1]
+
+    for i in range(3, n + 1):
+        tmp = (pizano[i - 1] + pizano[i - 2]) % m
+        if pizano[i - 1] == pizano[0] and tmp == pizano[1]:
             break
-    return res
+        if i == n:
+            return tmp
+        pizano.append(tmp)
+
+    period = len(pizano) - 1
+    position = n % period
+    return pizano[position]
 
 
 def main():
